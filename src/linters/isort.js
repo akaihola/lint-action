@@ -58,11 +58,10 @@ class Isort {
 		const lintResult = initLintResult();
 		lintResult.error = parseErrorsFromDiff(output.stdout);
 		for (let i = 0; i < lintResult.error.length; i++) {  // have to parse file name to strip trailing :after
-			let path = lintResult.error[i].path;
-			let pathEnd = path.lastIndexOf(":after");
+			const { path } = lintResult.error[i];
+			const pathEnd = path.lastIndexOf(":after");
 			lintResult.error[i].path = path.slice(0, pathEnd);
 		}
-		"";
 		lintResult.isSuccess = output.status === 0;
 		return lintResult;
 	}
