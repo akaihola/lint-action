@@ -344,6 +344,26 @@ inputs:
     required: false
     default: "false"
 
+  isort:
+    description: Enable or disable isort checks
+    required: false
+    default: "false"
+  isort_args:
+    description: Additional arguments to pass to the linter
+    required: false
+    default: ""
+  isort_dir:
+    description: Directory where the isort command should be run
+    required: false
+  isort_extensions:
+    description: Extensions of files to check with isort
+    required: false
+    default: "py"
+  isort_command_prefix:
+    description: Shell command to prepend to the linter command
+    required: false
+    default: ""
+
   mypy:
     description: Enable or disable Mypy checks
     required: false
