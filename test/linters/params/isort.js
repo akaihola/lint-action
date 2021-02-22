@@ -13,7 +13,6 @@ function getLintParams(dir) {
 		// Expected output of the linting function
 		cmdOutput: {
 			status: 1,
-			stdoutParts: [stdoutFile1],
 			stdout: stdoutFile1,
 		},
 		// Expected output of the parsing function
