@@ -37,7 +37,7 @@ function getFixParams(dir) {
 		// Expected output of the linting function
 		cmdOutput: {
 			status: 0,
-			stdout: "",
+			stdout: `Fixing ${dir}`,
 		},
 		// Expected output of the parsing function
 		lintResult: {

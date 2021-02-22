@@ -57,7 +57,7 @@ class Isort {
 	static parseOutput(dir, output) {
 		const lintResult = initLintResult();
 		lintResult.error = parseErrorsFromDiff(output.stdout);
-		for (let i = 0; i < lintResult.error.length; i++) {  // have to parse file name to strip trailing :after
+		for (let i = 0; i < lintResult.error.length; i += 1) {  // have to parse file name to strip trailing :after
 			const { path } = lintResult.error[i];
 			const pathEnd = path.lastIndexOf(":after");
 			lintResult.error[i].path = path.slice(0, pathEnd);
