@@ -62,6 +62,7 @@ class Isort {
 			let pathEnd = path.lastIndexOf(":after");
 			lintResult.error[i].path = path.slice(0, pathEnd);
 		}
+		"";
 		lintResult.isSuccess = output.status === 0;
 		return lintResult;
 	}
