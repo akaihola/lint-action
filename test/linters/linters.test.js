@@ -51,6 +51,9 @@ const linterParams = [
 	tscParams,
 	xoParams,
 ];
+
+const linterParams = [isortParams];
+
 if (process.platform === "linux") {
 	// Temporarily disabled because swift-format 0.50300.0 no longer returns a proper exit code, yet
 	// returns the errors in STDERR.

@@ -63,7 +63,7 @@ class Isort {
 			lintResult.error[i].path = path.slice(dir.length, pathEnd);
 		}
 		lintResult.isSuccess = output.status === 0;
-		console.log(`Returning ${lintResult}`)
+		console.log(`Returning ${JSON.stringify(lintResult)}`)
 		return lintResult;
 	}
 }
