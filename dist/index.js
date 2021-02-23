@@ -2645,7 +2645,7 @@ function run(cmd, options) {
 		};
 
 		core.debug(`Stdout: ${output.stdout}`);
-		console.log(`OUTPUT: ${output}`);
+		console.log(`OUTPUT: ${JSON.stringify(output)}`);
 
 		return output;
 	} catch (err) {
@@ -2660,7 +2660,7 @@ function run(cmd, options) {
 			core.debug(`Stdout: ${output.stdout}`);
 			core.debug(`Stderr: ${output.stderr}`);
 
-			console.log(`OUTPUT: ${output}`);
+			console.log(`OUTPUT: ${JSON.stringify(output)}`);
 
 			return output;
 		}
