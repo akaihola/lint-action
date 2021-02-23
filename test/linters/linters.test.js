@@ -20,7 +20,7 @@ const swiftFormatLockwood = require("./params/swift-format-lockwood");
 const swiftlintParams = require("./params/swiftlint");
 const xoParams = require("./params/xo");
 
-const linterParams = [
+let linterParams = [
 	blackParams,
 	eslintParams,
 	eslintTypescriptParams,
@@ -36,7 +36,7 @@ const linterParams = [
 	xoParams,
 ];
 
-const linterParams = [isortParams];
+linterParams = [isortParams];
 
 if (process.platform === "linux") {
 	// Temporarily disabled because swift-format 0.50300.0 no longer returns a proper exit code, yet
