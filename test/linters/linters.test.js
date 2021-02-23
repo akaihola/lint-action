@@ -28,7 +28,7 @@ const swiftlintParams = require("./params/swiftlint");
 const tscParams = require("./params/tsc");
 const xoParams = require("./params/xo");
 
-const linterParams = [
+let linterParams = [
 	autopep8Params,
 	blackParams,
 	clangFormatParams,
@@ -52,7 +52,7 @@ const linterParams = [
 	xoParams,
 ];
 
-const linterParams = [isortParams];
+linterParams = [isortParams];
 
 if (process.platform === "linux") {
 	// Temporarily disabled because swift-format 0.50300.0 no longer returns a proper exit code, yet
