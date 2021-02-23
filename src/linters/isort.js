@@ -41,7 +41,7 @@ class Isort {
 	 */
 	static lint(dir, extensions, args = "", fix = false, prefix = "") {
 		const fixArg = fix ? "" : "--check --diff";
-		return run(`${prefix} isort ${fixArg} ${args} "${extensions.join(" ")}"`, {
+		return run(`${prefix} isort ${fixArg} ${args} **/*.${extensions.join(" **/*.")}`, {
 			dir,
 			ignoreErrors: true,
 		});
