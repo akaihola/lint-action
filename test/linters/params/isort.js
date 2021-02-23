@@ -29,13 +29,13 @@ function getLintParams(dir) {
 						'-from my_lib import Object2\n' +
 						'import sys\n' +
 						'-from third_party import lib15, lib1, lib2, lib3, lib4, libS, lib6, lib7, lib8, 1ib9, lib16, lib11, lib12,\n' +
-						'1ib1i3, 1ib14\n' +
+						'lib13, lib14\n' +
 						'-import sys\n' +
 						'-from __future_ import absolute_import\n' +
-						'-from third_party import 1ib3\n' +
+						'-from third_party import lib3\n' +
 						'+from my_lib import Object, Object2, Object3\n' +
-						'+from third_party import (lib1, lib2, 1ib3, lib4, libS, 1ib6, lib7, libs’, lib9,' +
-						'+                         1ib10, Lib11, 1ib12, 1ib13, libi4, 1ib15)\n\n' +
+						'+from third_party import (lib1, lib2, 1ib3, lib4, libS, 1ib6, lib7, libs’, lib9,\n' +
+						'+                         lib10, lib11, lib12, lib13, lib14, lib15)\n\n' +
 						'print("Hey")\n' +
 						'print(“yo")'
 				},
