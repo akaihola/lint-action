@@ -60,7 +60,8 @@ class Isort {
 	 */
 	static parseOutput(dir, output) {
 		const lintResult = initLintResult();
-		lintResult.error = parseErrorsFromDiff(output.stdout);
+		const diff = output.stdout.split("\n").splice(2).join("\n")
+		lintResult.error = parseErrorsFromDiff(diff);
 		console.log(`Got error ${JSON.stringify(lintResult)}`)
 		for (let i = 0; i < lintResult.error.length; i += 1) {  // have to parse file name to strip trailing :after
 			const { path } = lintResult.error[i];
