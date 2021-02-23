@@ -38,6 +38,7 @@ function run(cmd, options) {
 	};
 
 	core.debug(cmd);
+	console.log(cmd);
 
 	try {
 		const stdout = execSync(cmd, { encoding: "utf8", cwd: optionsWithDefaults.dir });
@@ -48,6 +49,7 @@ function run(cmd, options) {
 		};
 
 		core.debug(`Stdout: ${output.stdout}`);
+		console.log(`OUTPUT: ${output}`);
 
 		return output;
 	} catch (err) {
@@ -61,6 +63,8 @@ function run(cmd, options) {
 			core.debug(`Exit code: ${output.status}`);
 			core.debug(`Stdout: ${output.stdout}`);
 			core.debug(`Stderr: ${output.stderr}`);
+
+			console.log(`OUTPUT: ${output}`);
 
 			return output;
 		}
