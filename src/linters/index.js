@@ -3,6 +3,7 @@ const ESLint = require("./eslint");
 const Flake8 = require("./flake8");
 const Gofmt = require("./gofmt");
 const Golint = require("./golint");
+const Isort = require("./isort");
 const Mypy = require("./mypy");
 const PHPCodeSniffer = require("./php-codesniffer");
 const Prettier = require("./prettier");
@@ -28,6 +29,7 @@ const linters = {
 	// Formatters (should be run after linters)
 	black: Black,
 	gofmt: Gofmt,
+	isort: Isort,
 	prettier: Prettier,
 	swift_format_lockwood: SwiftFormatLockwood,
 	swift_format_official: SwiftFormatOfficial,
