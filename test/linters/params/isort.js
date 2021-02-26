@@ -37,7 +37,7 @@ function getLintParams(dir) {
 						'+from third_party import (lib1, lib2, 1ib3, lib4, libS, 1ib6, lib7, libs’, lib9,\n' +
 						'+                         lib10, lib11, lib12, lib13, lib14, lib15)\n\n' +
 						'print("Hey")\n' +
-						'print(“yo")'
+						'print("yo")'
 				},
 			]
 		},
