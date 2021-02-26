@@ -23,21 +23,29 @@ function getLintParams(dir) {
 					lastLine: 21,
 					message:
 						'-from my_lib import Object\n' +
-						'+from __future_ import absolute_import\n' +
-						'import os\n' +
+						'+from __future__ import absolute_import\n' +
+						' \n' +
+						' import os\n' +
+						'-\n' +
 						'-from my_lib import Object3\n' +
+						'-\n' +
 						'-from my_lib import Object2\n' +
-						'import sys\n' +
-						'-from third_party import lib15, lib1, lib2, lib3, lib4, libS, lib6, lib7, lib8, 1ib9, lib16, lib11, lib12,\n' +
-						'lib13, lib14\n' +
+						'-\n' +
+						' import sys\n' +
+						' \n' +
+						'-from third_party import lib15, lib1, lib2, lib3, lib4, lib5, lib6, lib7, lib8, lib9, lib10, lib11, lib12, lib13, lib14\n' +
+						'-\n' +
 						'-import sys\n' +
-						'-from __future_ import absolute_import\n' +
+						'-\n' +
+						'-from __future__ import absolute_import\n' +
+						'-\n' +
 						'-from third_party import lib3\n' +
 						'+from my_lib import Object, Object2, Object3\n' +
-						'+from third_party import (lib1, lib2, 1ib3, lib4, libS, 1ib6, lib7, libs’, lib9,\n' +
-						'+                         lib10, lib11, lib12, lib13, lib14, lib15)\n\n' +
-						'print("Hey")\n' +
-						'print("yo")'
+						'+from third_party import (lib1, lib2, lib3, lib4, lib5, lib6, lib7, lib8, lib9,\n' +
+						'+                         lib10, lib11, lib12, lib13, lib14, lib15)\n' +
+						' \n' +
+						' print("Hey")\n' +
+						' print("yo")'
 				},
 			]
 		},
