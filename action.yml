@@ -1,4 +1,4 @@
-name: Lint Action
+name: Lint Action with isort
 author: Samuel Meuli
 description: GitHub Action for detecting and fixing linting errors
 
