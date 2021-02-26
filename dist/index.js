@@ -556,8 +556,8 @@ class OidcClient {
             const res = yield httpclient
                 .getJson(id_token_url)
                 .catch(error => {
-                throw new Error(`Failed to get ID Token. \n 
-        Error Code : ${error.statusCode}\n 
+                throw new Error(`Failed to get ID Token. \n
+        Error Code : ${error.statusCode}\n
         Error Message: ${error.result.message}`);
             });
             const id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
@@ -3545,7 +3545,7 @@ function expand(str, isTop) {
     ? expand(m.post, false)
     : [''];
 
-  if (/\$$/.test(m.pre)) {    
+  if (/\$$/.test(m.pre)) {
     for (var k = 0; k < post.length; k++) {
       var expansion = pre+ '{' + m.body + '}' + post[k];
       expansions.push(expansion);
@@ -7829,6 +7829,7 @@ const ESLint = __nccwpck_require__(7169);
 const Flake8 = __nccwpck_require__(3636);
 const Gofmt = __nccwpck_require__(7796);
 const Golint = __nccwpck_require__(5658);
+const Isort = __nccwpck_require__(536);
 const Mypy = __nccwpck_require__(8510);
 const Oitnb = __nccwpck_require__(1187);
 const PHPCodeSniffer = __nccwpck_require__(5405);
@@ -7865,6 +7866,7 @@ const linters = {
 	clang_format: ClangFormat,
 	dotnet_format: DotnetFormat,
 	gofmt: Gofmt,
+	isort: Isort,
 	oitnb: Oitnb,
 	rustfmt: RustFmt,
 	prettier: Prettier,
@@ -7877,6 +7879,90 @@ const linters = {
 };
 
 module.exports = linters;
+
+
+/***/ }),
+
+/***/ 536:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+const { run } = __nccwpck_require__(575);
+const commandExists = __nccwpck_require__(265);
+const { parseErrorsFromDiff } = __nccwpck_require__(388);
+const { initLintResult } = __nccwpck_require__(149);
+
+/**
+ * https://pycqa.github.io/isort
+ */
+class Isort {
+	static get name() {
+		return "isort";
+	}
+
+	/**
+	 * Verifies that all required programs are installed. Throws an error if programs are missing
+	 * @param {string} dir - Directory to run the linting program in
+	 * @param {string} prefix - Prefix to the lint command
+	 */
+	static async verifySetup(dir, prefix = "") {
+		// Verify that Python is installed (required to execute Black)
+		if (!(await commandExists("python"))) {
+			throw new Error("Python is not installed");
+		}
+
+		// Verify that isort is installed
+		try {
+			run(`${prefix} isort --version`, { dir });
+		} catch (err) {
+			throw new Error(`${this.name} is not installed`);
+		}
+	}
+
+	/**
+	 * Runs the linting program and returns the command output
+	 * @param {string} dir - Directory to run the linter in
+	 * @param {string[]} extensions - File extensions which should be linted
+	 * @param {string} args - Additional arguments to pass to the linter
+	 * @param {boolean} fix - Whether the linter should attempt to fix code style issues automatically
+	 * @param {string} prefix - Prefix to the lint command
+	 * @returns {{status: number, stdout: string, stderr: string}} - Output of the lint command
+	 */
+	static lint(dir, extensions, args = "", fix = false, prefix = "") {
+		if (extensions.length !== 1 || extensions[0] !== "py") {
+			throw new Error(`${this.name} error: File extensions are not configurable`);
+		}
+
+		const fixArg = fix ? "" : "--check --diff";
+		return run(`${prefix} isort ${fixArg} ${args} .`, {
+			dir,
+			ignoreErrors: true,
+		});
+	}
+
+	/**
+	 * Parses the output of the lint command. Determines the success of the lint process and the
+	 * severity of the identified code style violations
+	 * @param {string} dir - Directory in which the linter has been run
+	 * @param {{status: number, stdout: string, stderr: string}} output - Output of the lint command
+	 * @returns {import('../utils/lint-result').LintResult} - Parsed lint result
+	 */
+	static parseOutput(dir, output) {
+		const lintResult = initLintResult();
+		lintResult.error = parseErrorsFromDiff(output.stdout);
+		console.log(`Got error ${JSON.stringify(lintResult)}`)
+		for (let i = 0; i < lintResult.error.length; i += 1) {  // have to parse file name to strip trailing :after
+			const { path } = lintResult.error[i];
+			const pathEnd = path.lastIndexOf(":after");
+			lintResult.error[i].path = path.slice(dir.length + 1, pathEnd);
+		}
+		lintResult.isSuccess = output.status === 0;
+		console.log(`Got STDOUT ${output.stdout}\n\nSTDERR ${output.stderr}`)
+		console.log(`Returning ${JSON.stringify(lintResult)}`)
+		return lintResult;
+	}
+}
+
+module.exports = Isort;
 
 
 /***/ }),
@@ -11047,7 +11133,7 @@ module.exports = JSON.parse('{"name":"lint-action","version":"2.3.0","descriptio
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __nccwpck_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -11061,7 +11147,7 @@ module.exports = JSON.parse('{"name":"lint-action","version":"2.3.0","descriptio
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		var threw = true;
 /******/ 		try {
@@ -11070,16 +11156,16 @@ module.exports = JSON.parse('{"name":"lint-action","version":"2.3.0","descriptio
 /******/ 		} finally {
 /******/ 			if(threw) delete __webpack_module_cache__[moduleId];
 /******/ 		}
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat */
-/******/ 	
+/******/
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
