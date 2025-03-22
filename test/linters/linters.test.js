@@ -124,7 +124,6 @@ describe.each(linterParams)(
 			// Test `parseOutput` function
 			test(`${linter.name} parses ${lintMode} output correctly`, () => {
 				const lintResult = linter.parseOutput(projectTmpDir, expected.cmdOutput);
-				console.log(lintResult)
 				expect(lintResult).toEqual(expected.lintResult);
 			});
 		});

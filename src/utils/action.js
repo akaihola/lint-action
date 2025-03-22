@@ -38,7 +38,6 @@ function run(cmd, options) {
 	};
 
 	core.debug(cmd);
-	console.log(cmd);
 
 	try {
 		const stdout = execSync(cmd, {
@@ -53,7 +52,6 @@ function run(cmd, options) {
 		};
 
 		core.debug(`Stdout: ${output.stdout}`);
-		console.log(`OUTPUT: ${JSON.stringify(output)}`);
 
 		return output;
 	} catch (err) {
@@ -68,7 +66,6 @@ function run(cmd, options) {
 			core.debug(`Stdout: ${output.stdout}`);
 			core.debug(`Stderr: ${output.stderr}`);
 
-			console.log(`OUTPUT: ${JSON.stringify(output)}`);
 
 			return output;
 		}
