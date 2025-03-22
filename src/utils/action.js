@@ -66,7 +66,6 @@ function run(cmd, options) {
 			core.debug(`Stdout: ${output.stdout}`);
 			core.debug(`Stderr: ${output.stderr}`);
 
-
 			return output;
 		}
 		throw err;
